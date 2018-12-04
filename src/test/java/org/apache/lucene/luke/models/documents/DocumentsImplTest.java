@@ -27,6 +27,7 @@ import org.apache.lucene.util.NumericUtils;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public class DocumentsImplTest extends DocumentsTestBase {
@@ -147,6 +148,12 @@ public class DocumentsImplTest extends DocumentsTestBase {
     while (documents.nextTerm().isPresent()) {
       Integer freq = documents.getDocFreq().orElseThrow(IllegalStateException::new);
     }
+  }
+  @Test
+  public void testNextTermEmpty() {
+    DocumentsImpl documents = new DocumentsImpl(reader);
+    documents.resetTermsIterator();
+    assertEquals(false, documents.nextTerm().isPresent());
   }
 
   @Test

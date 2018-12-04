@@ -122,6 +122,12 @@ public class TermVectorsAdapterTest extends DocumentsTestBase {
     assertFalse(tvEntries.get(0).getPositions().get(0).getStartOffset().isPresent());
     assertFalse(tvEntries.get(0).getPositions().get(0).getEndOffset().isPresent());
   }
+  @Test
+  public void testGetTermVectorEmpty() throws Exception {
+    TermVectorsAdapter adapterImpl = new TermVectorsAdapter(reader);
+    List<TermVectorEntry> tvEntries = adapterImpl.getTermVector(0, "atext2");
+    assertTrue(tvEntries.isEmpty());
+  }
 
   @Test
   public void testGetTermVector_with_positions_offsets() throws Exception {

@@ -135,7 +135,7 @@ public abstract class DocumentsTestBase extends LuceneTestCase {
     dir.close();
   }
 
-  private BytesRef packInt(int value) {
+  public BytesRef packInt(int value) {
     byte[] dest = new byte[Integer.BYTES];
     NumericUtils.intToSortableBytes(value, dest, 0);
     return new BytesRef(dest);

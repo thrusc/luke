@@ -32,11 +32,11 @@ public class DirectoryHandler extends AbstractHandler<DirectoryObserver> {
 
   @Override
   protected void notifyOne(DirectoryObserver observer) {
-    if (state.closed) {
-      observer.closeDirectory();
-    } else {
-      observer.openDirectory(state);
-    }
+      if (state.closed) {
+        observer.closeDirectory();
+      } else {
+        observer.openDirectory(state);
+      }
   }
 
   public boolean directoryOpened() {

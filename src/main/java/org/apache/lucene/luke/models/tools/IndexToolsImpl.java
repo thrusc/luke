@@ -133,16 +133,20 @@ public final class IndexToolsImpl extends LukeModel implements IndexTools {
 
   @Override
   public void addDocument(Document doc, @Nullable Analyzer analyzer) {
-    if (reader instanceof DirectoryReader) {
-      Directory dir = ((DirectoryReader) reader).directory();
-      try (IndexWriter writer = IndexUtils.createWriter(dir, analyzer, useCompound, keepAllCommits)) {
-        writer.addDocument(doc);
-        writer.commit();
-      } catch (IOException e) {
-        throw new LukeException("Failed to add document", e);
+    if(null != doc) {
+      if (reader instanceof DirectoryReader) {
+        Directory dir = ((DirectoryReader) reader).directory();
+        try (IndexWriter writer = IndexUtils.createWriter(dir, analyzer, useCompound, keepAllCommits)) {
+          writer.addDocument(doc);
+          writer.commit();
+        } catch (IOException e) {
+          throw new LukeException("Failed to add document", e);
+        }
+      } else {
+        throw new LukeException("Current reader is not an instance of DirectoryReader.");
       }
     } else {
-      throw new LukeException("Current reader is not an instance of DirectoryReader.");
+      throw new IllegalArgumentException();
     }
   }
 

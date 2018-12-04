@@ -73,7 +73,7 @@ public final class DocumentsImpl extends LukeModel implements Documents {
   public boolean isLive(int docid) {
     return liveDocs == null || liveDocs.get(docid);
   }
-
+  
   @Override
   public List<DocumentField> getDocumentFields(int docid) {
     if (!isLive(docid)) {
@@ -321,7 +321,7 @@ public final class DocumentsImpl extends LukeModel implements Documents {
     this.curField = field;
   }
 
-  private void resetTermsIterator() {
+  public void resetTermsIterator() {
     this.tenum = null;
   }
 
