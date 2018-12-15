@@ -1,9 +1,18 @@
 language: java
+dist: trusty
 jdk:
   - oraclejdk8
   - oraclejdk9
-  - oraclejdk10
   - openjdk8
   - openjdk9
   - openjdk10
   - openjdk11
+  
+addons:
+  sonarcloud:
+    organization: "thrusc-github"
+    token:
+      secure: "qwC4nvtonyHZ2nHShOiDUCmgaR9SHAhH0pIMFy7OTWEK75EeRsgOEjZuA/S4X771W4okwTlS1VCtami+HX26oizpcmpAZLnHP7ZIpLdBRqB6PMzxBTynV9YPio+bYhiBBiCpMetzgHEhzvjO3gc2em4aZLTpvOrsKmyf/cPvY4CBsCJP/k1Lm8q4kIzOA6kt0WDzY1Uyb5b7xgetauEHfCAr5FC8WOqYKhHAY5S7dUN/bh1hUG2GZQhoQlAv1rM/kZutkJMxypVCSMjskIOqPuyd3DN1nH1dAWL+RAyjbHsKwpzf+dKtNtPomsEnhAAQTD+XglwoRdGIq1Iwrlpslx7mUHb1N3NQZiVPmvl1jM3JzikqROw09Broq/dYK0ktr7J2WJbdu8GTCcSZXIKy1R31BGOL70t1cgqHwhzyTcjQBTAULzdXLlJtyksJOVVfOv/dAebkXQGP2SE3c+T6bYDuJzZ5XR8J78iW9/IAu8hlG27x40FYpywYSIDXg7nIulI+73GpYJi5slVtrX32YmxOzuyYFEJVQ4MC/ZVpZwDWMigFLRAfDq0ujG4/XAQX/DKG32CVtuBB7RvvbXTPiXl861RPP7HaKaGI+7tTGPV7tn59trFC6iCTdQqd8nBVhU5tCVGFtkfqO/LDmUf50lNEc1td3Y3vU/NNOXtwU1c="
+script:
+  - mvn clean install sonar:sonar -Dsonar.projectKey=thrusc_luke -Dsonar.organization=thrusc-github -Dsonar.host.url=https://sonarcloud.io
+  - mvn clean test verify
